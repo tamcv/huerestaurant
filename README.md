@@ -15,11 +15,11 @@ URL: **heroku-app-url**
 * [X] User must be able to go two pages: Menu, and Contact Us.
 * [X] User can see the address and phone number on the contact us page.
 * [X] User can see a basic google map on the Contact Us page.
-* [ ] User can navigate to a menu page with four sections:
-  * [ ] Breakfast
-  * [ ] Lunch
-  * [ ] Dinner
-  * [ ] Drinks
+* [X] User can navigate to a menu page with four sections:
+  * [X] Breakfast
+  * [X] Lunch
+  * [X] Dinner
+  * [X] Drinks
 * [ ] User should see at least 5 food items in each section.
 * [ ] Each food item should have the following fields:
   * Name (Canh Chua)
