@@ -20,8 +20,8 @@ URL: **heroku-app-url**
   * [X] Lunch
   * [X] Dinner
   * [X] Drinks
-* [ ] User should see at least 5 food items in each section.
-* [ ] Each food item should have the following fields:
+* [X] User should see at least 5 food items in each section.
+* [X] Each food item should have the following fields:
   * Name (Canh Chua)
   * Description (Delicious fish soup)
   * Price (VND)
