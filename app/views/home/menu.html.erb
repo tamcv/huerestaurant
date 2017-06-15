@@ -1,5 +1,7 @@
 <h1>Menu</h1>
 
+
+
 <div class="btn-group">
     <% @sections.each do |s| %>
         <%= link_to s.name, menu_path(section_id: s.id), class: "btn #{params[:section_id] == s.id.to_s ? 'btn-primary' : 'btn-secondary'}" %>
@@ -13,11 +15,19 @@
             <th>Name</th>
             <th>Price</th>
             <th>Image</th>
+            <th>
+            <%= form_tag nil, method: 'get' do %>
+                <%= select_tag :sort_column, options_for_select([ "name", "price" ], @sort_column), class: "custom-select mb-2 mr-sm-2 mb-sm-0" %>
+                <%= select_tag :sort_direction, options_for_select([ "ascending", "descending" ], @sort_direction), class: "custom-select mb-2 mr-sm-2 mb-sm-0" %>
+                <%= hidden_field_tag :section_id, params[:section_id] %>
+                <%= submit_tag 'Sort', class: "btn btn-secondary" %>
+            <% end %>
+            </th>
         </tr>
     </thead>
     <tbody>
         <div class="tbody">
-            <% @current_section.food_items.each do |item| %>
+            <% @food_items.each do |item| %>
                 <tr>
                     <td><%= item.name %></td>
                     <td><%= number_to_currency item.price %></td>
