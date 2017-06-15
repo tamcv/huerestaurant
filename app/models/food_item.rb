@@ -1,5 +1,6 @@
 class FoodItem < ApplicationRecord
   belongs_to :section
+  has_many :orders
   validates :name, :price, presence: true
   
   def image_url_or_default
