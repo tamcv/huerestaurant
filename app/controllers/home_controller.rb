@@ -20,5 +20,12 @@ class HomeController < ApplicationController
             direction = params[:sort_direction] == 'ascending' ? 'ASC' : 'DESC'
             @food_items = @food_items.order("#{params[:sort_column]} #{direction}")
         end
+
+        if params[:search]
+          @food_items = FoodItem.search(params[:search]).order("created_at DESC")
+        else
+          @food_items = FoodItem.all.order('created_at DESC')
+        end
     end
+
 end
