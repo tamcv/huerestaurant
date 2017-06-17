@@ -35,9 +35,9 @@
                 <% @comments.each do |comment| %>
                     <div class="row">
                         <div class="col-md-12">
-                            <%= comment.commenter %>
-                            <span class="pull-right" align="right"><%= time_ago_in_words(comment.created_at) %></span>
-                            <p><%= comment.body %></p>
+                            <span><b><%= comment.commenter %></b></span>
+                            <span style="float:right;"><%= time_ago_in_words(comment.created_at) %></span>
+                            <p> &nbsp &nbsp<i><%= comment.body %></i></p>
                         </div>
                     </div>
                 <% end %>
@@ -45,11 +45,6 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star-empty"></span>
                         <%= form_for([@food_item, @food_item.comments.build]) do |f| %>
                           <p>
                             <%= f.label :commenter %><br>
