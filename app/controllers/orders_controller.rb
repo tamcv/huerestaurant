@@ -23,27 +23,27 @@ class OrdersController < ApplicationController
     end
 
     def success
-      @order = Order.find(params[:order_id])
-      @total = @order.food_item.price * @order.quantity + 20000
-      if @order.coupon.present?
-          @total = @total/2
-      end
-      # Send email to user
-    if @order.mail.present?
+        @order = Order.find(params[:order_id])
+        @total = @order.food_item.price * @order.quantity + 20000
+        if @order.coupon.present?
+            @total = @total/2
+        end
+        # Send email to user
+        if @order.mail.present?
 
-      mail_body = "Thanks for your oder \n
-          \n
-          ----------------------------- \n
-          Item: #{@order.food_item.name} \n
-          Quantity: #{@order.quantity} \n
-          ----------------------------- \n
-          Total: #{ ActionController::Base.helpers.number_to_currency(@total)}\n"
+          mail_body = "Thanks for your oder \n
+              \n
+              ----------------------------- \n
+              Item: #{@order.food_item.name} \n
+              Quantity: #{@order.quantity} \n
+              ----------------------------- \n
+              Total: #{ ActionController::Base.helpers.number_to_currency(@total)}\n"
 
-      ActionMailer::Base.mail(from: "testrubyclass1@gmail.com", 
-                            to: "chauviettam@gmail.com", 
-                            subject: "Hue Restaurant Order", 
-                            body: mail_body).deliver
-    end
+        #   ActionMailer::Base.mail(from: "testrubyclass1@gmail.com", 
+        #                         to: "chauviettam@gmail.com", 
+        #                         subject: "Hue Restaurant Order", 
+        #                         body: mail_body).deliver
+        end
     end
 
 
