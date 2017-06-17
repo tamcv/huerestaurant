@@ -9,10 +9,14 @@ class OrdersController < ApplicationController
       @order = @item.orders.build order_params
       
       if @order.save
-          redirect_to menu_path, flash: {success: "Your order is successful!"}
+          redirect_to success_path(:order_id => @order.id), flash: {success: "Your order is successful!"}
       else
           render 'new'
       end
+    end
+
+    def success
+      @order = Order.find(params[:order_id])
     end
 
     def order_params

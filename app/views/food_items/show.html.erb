@@ -1,31 +1,84 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
 
-<p>
-  <strong>Name:</strong>
-  <%= @food_item.name %>
-</p>
+    <div class="row">
 
-<p>
-  <strong>Description:</strong>
-  <%= @food_item.description %>
-</p>
 
-<p>
-  <strong>Price:</strong>
-  <%= @food_item.price %>
-</p>
+        <div class="col-md-9">
 
-<p>
-  <strong>Section:</strong>
-  <%= @food_item.section.name %>
-</p>
+            <div class="thumbnail">
+                <p style="text-align:center">
+                    <%= image_tag @food_item.image_url, height: '300', width: '600', align: 'center' %>
+                </p>
+                <div class="caption-full">
+                    <h4 style="text-align:left;">
+                        <span> <%= number_to_currency @food_item.price %>  </span>
+                        <span style="float:right;" ><%= '%.1f' % @food_item.comments.average(:star) %> stars  </span>
+                    </h4>
+                    <h4><a href="#">  <%= @food_item.name %> </a>
+                    </h4>
+                    <p> <%= @food_item.description %> </p>
+                </div>
+                <div class="ratings">
+                    <p> <%= @food_item.count_views %> views </p> </div>
+            </div>
 
-<p>
-<%= image_tag @food_item.image_url, height: '300', width: '300' %>
-</p>
+            <div class="well">
+
+                <div class="text-right">
+                    <a class="btn btn-success">Review</a>
+                </div>
+
+                <hr>
+
+                <% @comments.each do |comment| %>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <%= comment.commenter %>
+                            <span class="pull-right" align="right"><%= time_ago_in_words(comment.created_at) %></span>
+                            <p><%= comment.body %></p>
+                        </div>
+                    </div>
+                <% end %>
+                <hr>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star-empty"></span>
+                        <%= form_for([@food_item, @food_item.comments.build]) do |f| %>
+                          <p>
+                            <%= f.label :commenter %><br>
+                            <%= f.text_field :commenter %>
+                          </p>
+                          <p>
+                            <%= f.label :star %><br>
+                            <%= f.number_field :star %>
+                          </p>
+                          <p>
+                            <%= f.label :body %><br>
+                            <%= f.text_area :body %>
+                          </p>
+                          <p>
+                            <%= f.submit %>
+                          </p>
+                        <% end %>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
 <br>
 
 
 <%= link_to 'Edit', edit_food_item_path(@food_item) %> |
-<%= link_to 'Back', food_items_path %>
+<%= link_to 'Back', menu_path %>
 

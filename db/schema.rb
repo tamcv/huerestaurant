@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170616172356) do
+ActiveRecord::Schema.define(version: 20170617062437) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "comments", force: :cascade do |t|
+    t.string "commenter"
+    t.text "body"
+    t.integer "star", default: 0
+    t.bigint "food_item_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["food_item_id"], name: "index_comments_on_food_item_id"
+  end
 
   create_table "food_items", force: :cascade do |t|
     t.string "name"
@@ -23,6 +33,7 @@ ActiveRecord::Schema.define(version: 20170616172356) do
     t.string "image_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "count_views", default: 0
     t.index ["section_id"], name: "index_food_items_on_section_id"
   end
 
@@ -43,6 +54,7 @@ ActiveRecord::Schema.define(version: 20170616172356) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "comments", "food_items"
   add_foreign_key "food_items", "sections"
   add_foreign_key "orders", "food_items"
 end
