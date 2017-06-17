@@ -11,9 +11,7 @@ class HomeController < ApplicationController
         @sort_direction = 'ascending'
         if params[:section_id].present?
             @current_section = Section.find(params[:section_id])
-            @food_items = @current_section.food_items.order("count_views DESC")
-        else
-            @food_items = FoodItem.all
+            @food_items = @current_section.food_items
         end
 
         if params[:sort_column].present?
@@ -21,12 +19,14 @@ class HomeController < ApplicationController
             @sort_direction = params[:sort_direction]
             direction = params[:sort_direction] == 'ascending' ? 'ASC' : 'DESC'
             @food_items = @food_items.order("#{params[:sort_column]} #{direction}")
-        end
-
-        if params[:search].present?
-          @food_items = @food_items.search(params[:search]).order("created_at DESC")
         else
-          @food_items = @food_items.all.order('created_at DESC')
+            if params[:search].present?
+              @food_items = @current_section.food_items.search(params[:search]).order("created_at DESC")
+            else
+              if @current_section.present?
+                  @food_items = @current_section.food_items.all.order("count_views DESC")
+              end
+            end
         end
     end
 

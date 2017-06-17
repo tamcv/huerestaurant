@@ -6,7 +6,7 @@ Submitted by: Tam Chau
 
 Time spent: 18 hours spent in total
 
-URL: **heroku-app-url**
+URL: https://floating-spire-44719.herokuapp.com/
 
 ## User Stories
 
@@ -58,7 +58,7 @@ The following **known issues**:
 
 Here's a walkthrough of implemented user stories:
 
-![Video Walkthrough](path-to-your-GIF-file)
+![Video Walkthrough](public/walkthrough.gif)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
