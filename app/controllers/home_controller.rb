@@ -11,7 +11,7 @@ class HomeController < ApplicationController
         @sort_direction = 'ascending'
         if params[:section_id].present?
             @current_section = Section.find(params[:section_id])
-            @food_items = @current_section.food_items
+            @food_items = @current_section.food_items.order("count_views DESC")
         else
             @food_items = FoodItem.all
         end
