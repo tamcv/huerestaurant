@@ -7,7 +7,7 @@
         <%= link_to s.name, menu_path(section_id: s.id), class: "btn #{params[:section_id] == s.id.to_s ? 'btn-primary' : 'btn-secondary'}" %>
     <% end %>
 </div>
-
+<br>
 <% if @current_section %>
 <table class="table">
     <thead>
@@ -32,10 +32,16 @@
                     <td><%= link_to item.name, food_item_path(item.id) %></td>
                     <td><%= number_to_currency item.price %></td>
                     <td><%= image_tag item.image_url_or_default, height: '100', width: '100'%></td>
-                    <td><%= link_to 'Add to order', new_order_path(food_item_id: item.id) %></td>
+                    <td><%= link_to 'Add to order', new_order_path(food_item_id: item.id), class: "btn btn-success" %></td>
                 </tr>
             <% end %>
         </div>
     </tbody>
 </table>
+<% else %>
+<br>
+<br>
+<div class="btn-group">
+    <%= link_to "Please select the kind of food", menu_path, class: "btn btn-success" %>
+</div>
 <% end %>

@@ -12,7 +12,9 @@
                 <div class="caption-full">
                     <h4 style="text-align:left;">
                         <span> <%= number_to_currency @food_item.price %>  </span>
+                        <% if @food_item.comments.present? %>
                         <span style="float:right;" ><%= '%.1f' % @food_item.comments.average(:star) %> stars  </span>
+                        <% end %>
                     </h4>
                     <h4><a href="#">  <%= @food_item.name %> </a>
                     </h4>
@@ -25,7 +27,7 @@
             <div class="well">
 
                 <div class="text-right">
-                    <a class="btn btn-success">Review</a>
+                    <%= link_to 'Order', new_order_path(food_item_id: @food_item.id), class: "btn btn-success"%>
                 </div>
 
                 <hr>
@@ -80,5 +82,5 @@
 
 
 <%= link_to 'Edit', edit_food_item_path(@food_item) %> |
-<%= link_to 'Back', menu_path %>
+<%= link_to 'Back', menu_path(:section_id => @food_item.section_id) %>
 

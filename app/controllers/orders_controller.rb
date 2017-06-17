@@ -7,6 +7,13 @@ class OrdersController < ApplicationController
     def create
       @item = FoodItem.find(params[:food_item_id])
       @order = @item.orders.build order_params
+      if order_params[:coupon].present?
+          if order_params[:coupon] != 'CODERSCHOOL'
+              flash.now[:alert] = 'The coupon is invalid!'
+              render 'new'
+              return
+          end
+      end
       
       if @order.save
           redirect_to success_path(:order_id => @order.id), flash: {success: "Your order is successful!"}
@@ -17,10 +24,14 @@ class OrdersController < ApplicationController
 
     def success
       @order = Order.find(params[:order_id])
+      @total = @order.food_item.price * @order.quantity + 20000
+      if @order.coupon.present?
+          @total = @total/2
+      end
     end
 
     def order_params
-        params.require(:order).permit(:quantity, :username, :phone, :address)
+        params.require(:order).permit(:quantity, :username, :phone, :address, :coupon)
     end
 
 end
